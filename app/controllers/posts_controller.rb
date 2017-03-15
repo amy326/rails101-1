@@ -11,7 +11,7 @@ class PostsController < ApplicationController
     @group = Group.find(params[:group_id])
     @post = Post.new(post_params)
     @post.group = @group
-    @group.user = current_user
+    @post.user = current_user
 
     if @post.save
       redirect_to group_path(@group)
@@ -19,6 +19,8 @@ class PostsController < ApplicationController
       render :new
     end
   end
+
+private
 
   def post_params
     params.require(:post).permit(:content)
